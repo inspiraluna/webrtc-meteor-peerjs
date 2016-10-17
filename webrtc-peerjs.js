@@ -24,6 +24,26 @@ if (Meteor.isClient) {
   });
 
   Template.hello.onCreated(function () {
+
+    if (Meteor.isCordova) {
+    alert('inside cordova bla');
+        // Just for Cordova apps.
+      document.addEventListener('deviceready', function () {
+        // Just for iOS devices.
+        if (window.device.platform === 'iOS') {
+          alert('activated iosrtc!');
+          cordova.plugins.iosrtc.registerGlobals();
+        }
+      });
+
+     // angular.element(document).on('deviceready', onReady);
+
+    } else {
+
+     // angular.element(document).ready(onReady);
+
+    }
+
     Meteor.subscribe("presences");
     Meteor.subscribe("users");
 
